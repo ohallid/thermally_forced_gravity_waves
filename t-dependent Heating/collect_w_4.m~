@@ -129,7 +129,7 @@ caxis([ -100 100])
 grid on
 axis equal
 x = sprintf('w structure at (N * H * t / sigma / pi)=%6.1f, H=%6.1f*H_t',t,HL_bar);
-title('difference');
+title(x);
 xlabel('x / sigma');
 ylabel('z / Ht');
 

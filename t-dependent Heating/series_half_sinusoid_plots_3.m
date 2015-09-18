@@ -28,7 +28,7 @@ dz      = 0.1;         % z-step
 x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];
 x_0     = 0;             % initial position of heating function, middle of box
-s       = 0;             
+s       = 0.0015;             
 n       = 1;             % Number of half-sinusoids in interval
 N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
 [xx,zz] = meshgrid( x, z);

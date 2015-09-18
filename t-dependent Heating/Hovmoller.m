@@ -3,7 +3,7 @@ function [x1, t1, xx1, tt, ww, w_trop, w_ext] = Hovmoller()       % contour
 
 HL_bar       = 19.992;
 HV_bar       = 20.005;
-T            = 1000000500;
+T            = 500;
 x1           = [0:0.1:100];
 t1           = [0:250:3000];
 [xx1, tt]    = meshgrid(x1,  t1);
@@ -23,32 +23,40 @@ for i = 1:1:13
     t = t + 250;
 end
 figure(1)
-xx1 = xx1 ;
-%tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop1);
-%caxis([ -2000 2000])
-xlabel('w value at the tropopause')
-ylabel('time')
-%xlim([-100 100])
-
-figure(2)
-xx1 = xx1 ;
-%tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop2);
-%caxis([ -2000 2000])
-xlabel('w value at the tropopause')
-ylabel('time')
-%xlim([-100 100])
-
-figure(3)
+h(1) = subplot(3,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3);
-%caxis([ -2000 2000])
+colorbar
+caxis([ -100 100])
+title('w at 15km')
 xlabel('w value at the tropopause')
 ylabel('time')
 %xlim([-100 100])
 
+h(2) = subplot(3,1,2) ;
+xx1 = xx1 ;
+%tt  = tt * pi * sigma / N / HL_bar ; 
+contourf(xx1 , tt, w_trop2);
+colorbar
+caxis([ -100 100])
+title('w at 10km')
+xlabel('w value at the tropopause')
+ylabel('time')
+%xlim([-100 100])
+
+h(3) = subplot(3,1,3) ;
+xx1 = xx1 ;
+%tt  = tt * pi * sigma / N / HL_bar ; 
+contourf(xx1 , tt, w_trop1);
+colorbar
+title('w at 5km')
+caxis([ -100 100])
+xlabel('w value at the tropopause')
+ylabel('time')
+%xlim([-100 100])
+
+linkaxes(h)
 
 % surf plot
 % 
