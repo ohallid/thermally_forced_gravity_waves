@@ -1,6 +1,6 @@
 function [mm] = M2(bm, mz, c, s, x, x_0, z, t, H_bar , sigma)
 
-pi      = 3.1415;
+pi      = 3.14159265359;
 
 x1      = F2(x, x_0, s, t, sigma) / (c*c - s*s) ;  
 x2      = F2(x, x_0, c, t, sigma) / c / (c - s) ;

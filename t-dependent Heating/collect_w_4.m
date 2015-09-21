@@ -1,3 +1,4 @@
+% 3 x 3 panels showing difference between sharp and smooth heating
 function [ww] = collect_w_4()
 
 figure(1)
@@ -7,12 +8,12 @@ Ht_bar  = 0.3367;
 %t       = 1000;
 T       = 1500;
 
-% lid height 10
 h(1)  =  subplot(3,3,1);
 HL_bar   = 19.993;
 HV_bar   = 20.005;
-t        = 500;
+t        = 500;     % non-dimensional time
 sigma    = 1 ;
+t        = t * sigma; % to get corresponds in time between panels
 [ xx, zz, psi, ww1 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww1,30);
 % axis tight
@@ -32,6 +33,7 @@ HL_bar   = 19.993;
 HV_bar   = 20.005;
 t        = 1000;
 sigma    = 1 ;
+t        = t * sigma;
 [ xx, zz, psi, ww2 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww2,30);
 colorbar
@@ -50,6 +52,7 @@ HL_bar   = 19.993;
 HV_bar   = 20.005;
 t        = 1500;
 sigma    = 1 ;
+t        = t * sigma;
 [ xx, zz, psi,ww3 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww3,30);
 colorbar
@@ -68,6 +71,7 @@ HL_bar   = 19.993;
 HV_bar   = 20.005;
 t        = 500;
 sigma    = 0.25 ;
+t        = t * sigma;
 [ xx, zz, psi,ww4 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww4,30);
 colorbar
@@ -86,6 +90,7 @@ HL_bar   = 19.993;
 HV_bar   = 20.005;
 t        = 1000;
 sigma    = 0.25 ;
+t        = t * sigma;
 [ xx, zz, psi,ww5 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww5,30);
 colorbar
@@ -104,6 +109,7 @@ HL_bar   = 19.993;
 HV_bar   = 20.005;
 t        = 1500;
 sigma    = 0.25 ;
+t        = t * sigma;
 [ xx, zz, psi,ww6 ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
 contourf(xx,zz,ww6,30);
 colorbar
