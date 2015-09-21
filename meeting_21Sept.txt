@@ -1,0 +1,35 @@
+Meeting with SDG, DP 21/09/15
+
+Hovmoller;
+	Heights should be around 1km, 5km, 15km
+	Long time, ~3 hours
+	Question validity of response
+
+Convergence;
+	Difference Hovmollers
+	Calc maximum difference at different heights and times, plot
+	Plot maxmium distance as a function of different parameters
+
+Transient;
+	Converve Heating wrt time. Short time with large magnitude vs long time with small magnitude. 
+	
+
+Sensitivity to Heating Function
+	Difference plots in Hovmoller
+	"thought experiment": increase height of sine (might vary group speed). 
+
+
+Comments:
+	DP;
+	Not obvious what the difference will be between wide small and narrow large
+	Set grid box of ~25km, have smooth heating over full box - control run. Keep integrated heating the same,
+		 play about with parameters. Relate to questions in GCM models.
+	Interested in far field response.
+	Need to get rotation in. 
+	Expecting differences in group speed (?)
+
+	SDG;
+	Bear in mind that general integral (with no lid) might answer some of these questions. 
+	Try to do this indpendently, thinking about how I can tell the story rather than just doing what they tell me
+		 to do (?!?!??@!R<MKNJUH)
+	Group Speed: need to think about which one to use (as it depends on k,m. 

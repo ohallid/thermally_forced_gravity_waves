@@ -27,7 +27,7 @@ dx      = 0.1;         % x-step
 dz      = 0.1;         % z-step
 x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];
-x_0     = 50;             % initial position of heating function, middle of box
+x_0     = 0;             % initial position of heating function, middle of box
 s       = 0.00;             
 %s       = 0.006;
 n       = 1;             % Number of half-sinusoids in interval
@@ -50,7 +50,7 @@ b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht
 c  = N * HL_bar / pi / 1;
 ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar, sigma ) ;
 FS = b1 * sin ( pi * 1 .* z * H_bar );
-for mz = 2:200
+for mz = 2:100
     c  = N * HL_bar / pi / mz;
     bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
     bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );

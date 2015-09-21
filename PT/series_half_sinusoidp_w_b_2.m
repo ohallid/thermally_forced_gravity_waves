@@ -1,9 +1,6 @@
-function [ xx, zz, psi, ww] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma)
+function [ bb, uu, ww, xx, zz ] = series_half_sinusoidp_w_b_2(HL_bar, HV_bar , t, T, sigma)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%   HL_bar ratio,  lid height as a multiple of heating height
-%   HV_bar ratio,  visualisation height as a multiple of heating height
 
 %   Returns velocity field component u(x_bar,z_bar,t) in uu, units of Q_0,
 %   Returns velocity field component w(x_bar,z_bar,t) in ww, units of Q_0.
@@ -20,21 +17,18 @@ function [ xx, zz, psi, ww] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-pi      = 3.14159265359;
 Ht_bar  = 1 / HL_bar;
 H_bar   = 1 / HL_bar;
+pi      = 3.1415;       
 dx      = 0.1;         % x-step
 dz      = 0.1;         % z-step
 x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
-z       = [0:dz:HV_bar ];
-x_0     = 50;             % initial position of heating function, middle of box
-s       = 0.00;             
-%s       = 0.006;
+z       = [0:dz:HV_bar ];     % z = 1  equivalent to H_t, H >> H_t is lid position
+x_0     = 0;             % initial position of heating function, middle of box
+s       = 0;             
 n       = 1;             % Number of half-sinusoids in interval
-N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
+N       = 0.0115;          % Based on dry lapse rate of 10 deg per km (notes)
 [xx,zz] = meshgrid( x, z);
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -43,18 +37,19 @@ N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% H(t) terms
 mz = 1;
-b1 = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
-b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-c  = N * HL_bar / pi / 1;
-ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar, sigma ) ;
+b1 = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                                                       % square step                      
+b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );  % half-sinusoid
+c  = N * HL_bar / 1 / pi;
+ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar , sigma) ;
+bb = M3(b1, mz, c, s, x, x_0, z, t, H_bar , sigma) ;
 FS = b1 * sin ( pi * 1 .* z * H_bar );
-for mz = 2:200
+for mz = 2:100
     c  = N * HL_bar / pi / mz;
-    bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-    bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-    ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar, sigma );
+    bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                                                      % square step                   
+    bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );  % half-sinusoid
+    ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar , sigma);
+    bb = bb + M3(bm, mz, c, s, x, x_0, z, t, H_bar , sigma);
     FS = FS + bm * sin ( pi * mz .* z .* H_bar );
 end 
 
@@ -64,18 +59,20 @@ if (t > T)
         b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
         b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
         c   = N * HL_bar / pi / 1;
-        wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
+        bbp = M3(b1, mz, c, s, x, x_0, z, t-T , H_bar, sigma ) ;
         FS  = b1 * sin ( pi * 1 .* z * H_bar );
         for mz = 2:100
                  c  = N * HL_bar / pi / mz;
                 bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
                 bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-                wwp = wwp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
+                bbp = bbp + M3(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
         end 
-        ww   = ww - wwp;
+        bb   = bb - bbp;
 end
 
 
+bb  = HL_bar * HL_bar / pi / pi * bb;
+bb  = -10 * bb / 380; 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -101,6 +98,7 @@ for i = 2 : x_max
     end
 end
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %   Computing rectangular streamfunciton
@@ -120,5 +118,53 @@ for i = 2 : z_max
     end
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%   Plotting velocity field
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% figure ( 1 )
+% quiver(xx,zz,uu,ww);
+% axis tight
+% title('Velocity field in x-z plane');
+
+%figure ( 2 )
+%contour(xx,zz,ww)
+%axis tight
+%grid on
+%title('w(x,z,t) field in x-z plane');
+
+%figure ( 3 )
+%contour(xx,zz,psi,30);
+%axis tight
+%grid on
+%x = sprintf('Rectangular streamfunction at (Nt/FWHM)=%6.1f, H=%6.1f*H_t',t,1/Ht_bar);
+%title(x);
+%xlabel('x / FWHM');
+%ylabel('z / ( 3 * Ht )');
+
+%figure ( 4 )
+%contour(xx,zz,bb,30);
+%axis tight
+%grid on
+%x = sprintf('Potential temperature (Nt/FWHM)=%6.1f, H=%6.1f*H_t',t,1/Ht_bar);
+%title(x);
+%xlabel('x / FWHM');
+%ylabel('z / ( 3 * Ht )');
+
+%figure ( 4 )
+%contour(xx,zz,uu)
+%axis tight
+%grid on
+%title('u(x,z,t) field in x-z plane');
+
+%figure ( 5 )
+%plot(FS,z);
+%xlabel('Q');
+%ylabel('z/H')
+%axis tight
+%grid on
+%title('Fourier series of heat forcing function');
 
 return 
