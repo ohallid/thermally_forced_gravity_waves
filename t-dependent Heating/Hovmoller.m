@@ -1,5 +1,5 @@
 %function [x1, t1, xx1, tt, ww, w_trop        ]  = Hovmoller()        % surf
-function [x1, t1, xx1, tt, ww, w_trop, w_ext] = Hovmoller()       % contour
+function [x1, t1, xx1, tt, ww, w_trop3] = Hovmoller()       % contour
 
 HL_bar       = 19.992;
 HV_bar       = 20.005;

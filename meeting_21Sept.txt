@@ -32,4 +32,4 @@ Comments:
 	Bear in mind that general integral (with no lid) might answer some of these questions. 
 	Try to do this indpendently, thinking about how I can tell the story rather than just doing what they tell me
 		 to do (?!?!??@!R<MKNJUH)
-	Group Speed: need to think about which one to use (as it depends on k,m. 
+	Group Speed: need to think about which one to use (as it depends on k,m). 
