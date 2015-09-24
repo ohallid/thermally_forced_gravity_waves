@@ -1,14 +1,14 @@
 %function [x1, t1, xx1, tt, ww, w_trop        ]  = Hovmoller()        % surf
-function [w_trop1 ,w_trop2 , w_trop3 , w_trop4 ] = Hovmoller_collect()       % contour
+function [w_trop1 ,w_trop2 , w_trop3 , w_trop4 ] = Hovmoller_collect(HL_bar, T, sigma)       % contour
 
-HL_bar       = 89.992;
+%HL_bar       = 89.992;
 HV_bar       = 20.005;
-T            = 10000;
+%T            = 10000;
 x1           = [0:0.1:100];
 t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
 w_trop       = zeros(13 , 1001);
-sigma        = 5;
+%sigma        = 1;
 N            = 0.01;
 
 t = 0;
@@ -28,7 +28,7 @@ figure(1)
 h(1) = subplot(4,1,1) ;
 contourf(xx1 , tt, w_trop4);
 colorbar
-caxis([ -1 1])
+caxis([ -3 3])
 title('w at 15km')
 xlabel('w value at the tropopause')
 ylabel('time')
@@ -37,7 +37,7 @@ xlim([0 100])
 h(2) = subplot(4,1,2) ;
 contourf(xx1 , tt, w_trop3);
 colorbar
-caxis([ -1 1])
+caxis([ -3 3])
 title('w at 10km')
 xlabel('w value at the tropopause')
 ylabel('time')
@@ -47,7 +47,7 @@ h(3) = subplot(4,1,3) ;
 contourf(xx1 , tt, w_trop2);
 colorbar
 title('w at 5km')
-caxis([ -1 1])
+caxis([ -3 3])
 xlabel('w value at the tropopause')
 ylabel('time')
 xlim([0 100])
@@ -55,7 +55,7 @@ xlim([0 100])
 h(4) = subplot(4,1,4) ;
 contourf(xx1 , tt, w_trop1);
 colorbar
-caxis([ -1 1])
+caxis([ -3 3])
 title('w at 1km')
 xlabel('w value at the tropopause')
 ylabel('time')

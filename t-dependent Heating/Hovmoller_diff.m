@@ -1,3 +1,7 @@
+% Calculates and plots 2 Hovmoller for 2 configured Lid Heights, as well as
+% a Hovmoller of the difference
+% Config list: 2 x HL_bar, t, data height, time step, sigma, T, N. 
+
 %function [x1, t1, xx1, tt, ww, w_trop        ]  = Hovmoller()        % surf
 function [  w_trop1_diff, w_trop2_diff , w_trop3_diff] = Hovmoller_diff()       % contour
 

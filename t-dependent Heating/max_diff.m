@@ -3,9 +3,9 @@ function [ Height , delta_diff ] = max_diff()
 
 HV_bar       = 20.005;
 T            = 500000000;
-sigma        = 5;
+sigma        = 0.05;
 N            = 0.01;
-t            = 10800;
+t            = 1800;
 Height       = [1:1:100];
 
 delta_diff   = [1:1:100];
