@@ -6,7 +6,7 @@ H_bar   = 0.9898;
 Ht_bar  = 0.3367;
 t       = 2000;
 T       = 100000;
-sigma   = 1;
+sigma   = 5;
 
 
 % lid height 10

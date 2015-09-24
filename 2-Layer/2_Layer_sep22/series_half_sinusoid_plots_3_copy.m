@@ -25,9 +25,9 @@ function [ xx, zz, ww ] = series_half_sinusoid_plots_3_copy(HL_bar , HV_bar, Ht_
 pi      = 3.141592653589793;
 dx      = 0.015;         % x-step
 dz      = 0.015;         % z-step
-x       = [0:dx:20 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+x       = [0:dx:50 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];
-x_0     = 0;             % initial position of heating function, middle of box
+x_0     = 25;             % initial position of heating function, middle of box
 s       = 0;             
 N1      = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
 N2      = 0.0199;

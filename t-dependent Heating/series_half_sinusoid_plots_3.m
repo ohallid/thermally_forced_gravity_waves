@@ -27,7 +27,7 @@ dx      = 0.1;         % x-step
 dz      = 0.1;         % z-step
 x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];
-x_0     = 0;             % initial position of heating function, middle of box
+x_0     = 50;             % initial position of heating function, middle of box
 s       = 0.00;             
 %s       = 0.006;
 n       = 1;             % Number of half-sinusoids in interval
@@ -77,30 +77,30 @@ end
 % Adding in second mode
 % Minus signs come in on b1, bm in order to get correct phase (low-level
 % cooling).
-n = 2;
-for mz = 2:200
-    c  = N * HL_bar / pi / mz;
-    bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-    bm  = - 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-    ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar, sigma );
-    FS = FS + bm * sin ( pi * mz .* z .* H_bar );
-end 
-% H(t - T) terms if needed
-if (t > T)
-        mz  = 1;
-        b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
-        b1  = -2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-        c   = N * HL_bar / pi / 1;
-        wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
-        FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:100
-                 c  = N * HL_bar / pi / mz;
-                bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-                bm  = - 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-                wwp = wwp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
-        end 
-        ww   = ww - wwp;
-end
+% n = 2;
+% for mz = 2:200
+%     c  = N * HL_bar / pi / mz;
+%     bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
+%     bm  = - 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
+%     ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar, sigma );
+%     FS = FS + bm * sin ( pi * mz .* z .* H_bar );
+% end 
+% % H(t - T) terms if needed
+% if (t > T)
+%         mz  = 1;
+%         b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
+%         b1  = -2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
+%         c   = N * HL_bar / pi / 1;
+%         wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
+%         FS  = b1 * sin ( pi * 1 .* z * H_bar );
+%         for mz = 2:100
+%                  c  = N * HL_bar / pi / mz;
+%                 bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
+%                 bm  = - 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
+%                 wwp = wwp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
+%         end 
+%         ww   = ww - wwp;
+% end
 
 
 
