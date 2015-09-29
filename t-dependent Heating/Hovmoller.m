@@ -8,7 +8,7 @@ x1           = [0:0.1:100];
 t1           = [0:250:3000];
 [xx1, tt]    = meshgrid(x1,  t1);
 w_trop       = zeros(13 , 1001);
-sigma        = 1;
+sigma        = 5;
 N            = 0.01;
 
 t = 0;
@@ -22,7 +22,7 @@ for i = 1:1:13
     w_trop3(i,:)         = w_ext3(:);
     t = t + 250;
 end
-figure(1)
+figure(10)
 h(1) = subplot(3,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 

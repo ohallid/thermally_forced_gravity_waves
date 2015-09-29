@@ -7,18 +7,23 @@ function [  w_trop1_diff, w_trop2_diff , w_trop3_diff] = Hovmoller_diff()       
 
 %HL_bar       = 19.992;
 HV_bar       = 20.005;
-T            = 500;
+%T            = 10000;
 x1           = [0:0.1:100];
-t1           = [0:250:3000];
+t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
-sigma        = 1;
+%sigma        = 5;
 N            = 0.01;
 
-for j = 1:2
+for j = 1:1
     t = 0;
-    for i = 1:1:13
-        HL_bar = 149.993 ;
+    for i = 1:1:41
+        HL_bar      = 99.993 ;
+        sigma       = 5;
+        T           = 10000;
+        Q           = 1;
         [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
+        w_ext0               = ww(2,:);
+        w_trop0(i,:)         = w_ext0(:);
         w_ext1               = ww(10,:);
         w_trop1(i,:)         = w_ext1(:);
         w_ext2               = ww(20,:);
@@ -28,9 +33,15 @@ for j = 1:2
         t = t + 250;
     end
     t = 0;
-    for k = 1:1:13
-        HL_bar = HL_bar + 1 ;
+    for k = 1:1:41
+        HL_bar = HL_bar ;
+        sigma       = 5;
+        T           = 2500;
+        Q           = 4;
         [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
+        ww          = Q * ww;
+        w_ext0p               = ww(2,:);
+        w_trop0p(i,:)         = w_ext0p(:);
         w_ext1p               = ww(10,:);
         w_trop1p(k,:)         = w_ext1p(:);
         w_ext2p               = ww(20,:);
@@ -39,6 +50,10 @@ for j = 1:2
         w_trop3p(k,:)         = w_ext3p(:);
         t = t + 250;
     end
+    delta_w0          = w_trop0p - w_trop0;
+    w_trop0_diff      = delta_w0 .* delta_w0;
+    w_trop0_diff      = sqrt(w_trop0_diff);
+    
     delta_w1          = w_trop1p - w_trop1;
     w_trop1_diff      = delta_w1 .* delta_w1;
     w_trop1_diff      = sqrt(w_trop1_diff);
@@ -59,10 +74,10 @@ xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 15km')
-xlabel('w value at the tropopause')
-ylabel('time')
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
 h(2) = subplot(3,1,2) ;
@@ -70,10 +85,10 @@ xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop2);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 10km')
-xlabel('w value at the tropopause')
-ylabel('time')
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
 h(3) = subplot(3,1,3) ;
@@ -82,9 +97,9 @@ xx1 = xx1 ;
 contourf(xx1 , tt, w_trop1);
 colorbar
 title('w at 5km')
-caxis([ -100 100])
-xlabel('w value at the tropopause')
-ylabel('time')
+caxis([ -3 3])
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 linkaxes(h)
 
@@ -96,10 +111,10 @@ xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3p);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 15km')
-xlabel('w value at the tropopause')
-ylabel('time')
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
 h(2) = subplot(3,1,2) ;
@@ -107,7 +122,7 @@ xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop2p);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 10km')
 xlabel('w value at the tropopause')
 ylabel('time')
@@ -119,7 +134,7 @@ xx1 = xx1 ;
 contourf(xx1 , tt, w_trop1p);
 colorbar
 title('w at 5km')
-caxis([ -100 100])
+caxis([ -3 3])
 xlabel('w value at the tropopause')
 ylabel('time')
 xlim([25 75])
@@ -129,39 +144,49 @@ end
 
 % Difference Hovmoller
 figure(3)
-h(1) = subplot(3,1,1) ;
+h(1) = subplot(4,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3_diff);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 15km')
-xlabel('w value at the tropopause')
-ylabel('time')
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
-h(2) = subplot(3,1,2) ;
+h(2) = subplot(4,1,2) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop2_diff);
 colorbar
-caxis([ -100 100])
+caxis([ -3 3])
 title('w at 10km')
-xlabel('w value at the tropopause')
-ylabel('time')
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
-h(3) = subplot(3,1,3) ;
+h(3) = subplot(4,1,3) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop1_diff);
 colorbar
 title('w at 5km')
-caxis([ -100 100])
-xlabel('w value at the tropopause')
-ylabel('time')
+caxis([ -3 3])
+xlabel('Distance (km)')
+ylabel('Time (s)')
 xlim([25 75])
 
+h(4) = subplot(4,1,4) ;
+xx1 = xx1 ;
+%tt  = tt * pi * sigma / N / HL_bar ; 
+contourf(xx1 , tt, w_trop0_diff);
+colorbar
+title('w at 1km')
+caxis([ -3 3])
+xlabel('Distance (km)')
+ylabel('Time (s)')
+xlim([25 75])
 % end
 
 

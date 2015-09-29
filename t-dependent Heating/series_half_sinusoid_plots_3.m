@@ -65,7 +65,7 @@ if (t > T)
         c   = N * HL_bar / pi / 1;
         wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
         FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:100
+        for mz = 2:200
                  c  = N * HL_bar / pi / mz;
                 bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
                 bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
@@ -73,6 +73,10 @@ if (t > T)
         end 
         ww   = ww - wwp;
 end
+
+
+Q   = 1;        % Scale factor on total vertical velocity
+ww  = Q * ww; 
 
 % Adding in second mode
 % Minus signs come in on b1, bm in order to get correct phase (low-level
