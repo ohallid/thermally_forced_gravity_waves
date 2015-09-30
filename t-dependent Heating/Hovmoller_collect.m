@@ -8,7 +8,7 @@ x1           = [0:0.1:100];
 t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
 w_trop       = zeros(13 , 1001);
-sigma        = 1;
+sigma        = 5;
 N            = 0.01;
 
 t = 0;

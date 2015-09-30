@@ -1,0 +1,12 @@
+
+Let T_0 be the reference time (cycle “period”). Let T_1 < T_0 be the time for which heat is applied.
+ 
+Suppose you are computing w(x,z,t) for all x, z within the box at times {t_1, t_2, t_3,….,T_0}, where the interval dt = ( t_2 – t_1 ) is small compared with the duration of heating, T_1.
+ 
+Time average
+               Form the sum M(x,z) =  ( w(x,z,t_1) * dt + w(x,z,t_2) * dt + …….+ w(x,z,T_0) * dt )  
+               <w(x,z)>_t = M(x,z)  / T_0
+ 
+Time and space average
+               Add-up <w(x,z)>_t over all x, z in the box
+               Divide result by number of points in box.

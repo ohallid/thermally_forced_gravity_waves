@@ -1,0 +1,15 @@
+% Compute time averaged value for a given run.
+
+dt  = 100;
+T_0 = 10000;    % cycle period
+T_1 = 10000;    % Time for which heat is applied
+
+
+
+
+t = 0;
+for i = 1:100
+    [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
+    t_av = w  
+    t = t + 100;
+end
