@@ -1,5 +1,5 @@
 % Compute time averaged value for a given run.
-function [t_av] = time_average_p ()
+function [t_av] = time_average()
 
 
 
