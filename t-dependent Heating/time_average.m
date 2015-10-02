@@ -10,14 +10,14 @@ HV_bar       = 20.005;
 x1           = [0:0.1:100];
 t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
-sigma        = 5;
+sigma        = 1;
 N            = 0.01;
 
 dt  = 100;
 
 % define heating regime
 T_0    = 10000;    % cycle period
-T      = 5000;     % Time for which heat is applied
+T      = 10000;     % Time for which heat is applied
 scalar = 2;        % Factor to conserve total heat input
 
 % calculate initial, t = 0 response
