@@ -147,7 +147,7 @@ figure(3)
 h(1) = subplot(4,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop3_diff);
+contourf(xx1 , tt, delta_w3);
 colorbar
 caxis([ -3 3])
 title('w at 15km')
@@ -158,7 +158,7 @@ xlim([25 75])
 h(2) = subplot(4,1,2) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop2_diff);
+contourf(xx1 , tt, delta_w2);
 colorbar
 caxis([ -3 3])
 title('w at 10km')
@@ -169,7 +169,7 @@ xlim([25 75])
 h(3) = subplot(4,1,3) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop1_diff);
+contourf(xx1 , tt, delta_w1 );
 colorbar
 title('w at 5km')
 caxis([ -3 3])
@@ -180,7 +180,7 @@ xlim([25 75])
 h(4) = subplot(4,1,4) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop0_diff);
+contourf(xx1 , tt, delta_w0);
 colorbar
 title('w at 1km')
 caxis([ -3 3])
