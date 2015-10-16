@@ -3,13 +3,11 @@
 % Config list: 2 x HL_bar, t, data height, time step, sigma, T, N. 
 
 %function [x1, t1, xx1, tt, ww, w_trop        ]  = Hovmoller()        % surf
-%function [ w_trop0_diff, w_trop1_diff, w_trop2_diff , w_trop3_diff] = Hovmoller_diff()       % contour
-function [ w_trop0p ] = Hovmoller_diff()
+function [  w_trop1_diff, w_trop2_diff , w_trop3_diff] = Hovmoller_diff()       % contour
 
 %HL_bar       = 19.992;
 HV_bar       = 20.005;
 %T            = 10000;
-x_0          = 50;
 x1           = [0:0.1:100];
 t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
@@ -21,9 +19,9 @@ for j = 1:1
     for i = 1:1:41
         HL_bar      = 99.993 ;
         sigma       = 5;
-        T           = 3600;
+        T           = 10000;
         Q           = 1;
-        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma, x_0);
+        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
         w_ext0               = ww(2,:);
         w_trop0(i,:)         = w_ext0(:);
         w_ext1               = ww(10,:);
@@ -38,12 +36,12 @@ for j = 1:1
     for k = 1:1:41
         HL_bar = HL_bar ;
         sigma       = 5;
-        T           = 900;
+        T           = 2500;
         Q           = 4;
-        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma, x_0);
+        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
         ww          = Q * ww;
         w_ext0p               = ww(2,:);
-        w_trop0p(k,:)         = w_ext0p(:);
+        w_trop0p(i,:)         = w_ext0p(:);
         w_ext1p               = ww(10,:);
         w_trop1p(k,:)         = w_ext1p(:);
         w_ext2p               = ww(20,:);
@@ -71,7 +69,7 @@ for j = 1:1
     
 % Hovmoller 1    
 figure(1)
-h(1) = subplot(4,1,1) ;
+h(1) = subplot(3,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3);
@@ -82,7 +80,7 @@ xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
 
-h(2) = subplot(4,1,2) ;
+h(2) = subplot(3,1,2) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop2);
@@ -93,7 +91,7 @@ xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
 
-h(3) = subplot(4,1,3) ;
+h(3) = subplot(3,1,3) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop1);
@@ -103,24 +101,12 @@ caxis([ -3 3])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
-
-
-h(4) = subplot(4,1,4) ;
-xx1 = xx1 ;
-%tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop0);
-colorbar
-title('w at 1km')
-caxis([ -3 3])
-xlabel('Distance (km)')
-ylabel('time')
-xlim([25 75])
 linkaxes(h)
 
 
 %Hovmoller 2
 figure(2)
-h(1) = subplot(4,1,1) ;
+h(1) = subplot(3,1,1) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop3p);
@@ -131,37 +117,25 @@ xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
 
-h(2) = subplot(4,1,2) ;
+h(2) = subplot(3,1,2) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop2p);
 colorbar
 caxis([ -3 3])
 title('w at 10km')
-xlabel('Distance (km)')
+xlabel('w value at the tropopause')
 ylabel('time')
 xlim([25 75])
 
-h(3) = subplot(4,1,3) ;
+h(3) = subplot(3,1,3) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, w_trop1p);
 colorbar
 title('w at 5km')
 caxis([ -3 3])
-xlabel('Distance (km)')
-ylabel('time')
-xlim([25 75])
-
-
-h(4) = subplot(4,1,4) ;
-xx1 = xx1 ;
-%tt  = tt * pi * sigma / N / HL_bar ; 
-contourf(xx1 , tt, w_trop0p);
-colorbar
-title('w at 1km')
-caxis([ -3 3])
-xlabel('Distance (km)')
+xlabel('w value at the tropopause')
 ylabel('time')
 xlim([25 75])
 linkaxes(h)
@@ -180,7 +154,6 @@ title('w at 15km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
-ylim([0 10000])
 
 h(2) = subplot(4,1,2) ;
 xx1 = xx1 ;
@@ -192,7 +165,6 @@ title('w at 10km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
-ylim([0 10000])
 
 h(3) = subplot(4,1,3) ;
 xx1 = xx1 ;
@@ -204,7 +176,6 @@ caxis([ -3 3])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
-ylim([0 10000])
 
 h(4) = subplot(4,1,4) ;
 xx1 = xx1 ;
@@ -216,7 +187,6 @@ caxis([ -3 3])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([25 75])
-ylim([0 10000])
 % end
 
 

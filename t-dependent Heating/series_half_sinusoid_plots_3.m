@@ -1,4 +1,4 @@
-function [ xx, zz, psi, ww] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma)
+function [ xx, zz, psi, ww] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma, x_0)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,7 +50,8 @@ b1  =  2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - H
 c  = N * HL_bar / pi / 1;
 ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar, sigma ) ;
 FS = b1 * sin ( pi * 1 .* z * H_bar );
-for mz = 2:200
+mode_number = 20 * round(HL_bar); % conserve number of modes spatially 
+for mz = 2:mode_number
     c  = N * HL_bar / pi / mz;
     bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
     bm  =  2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
@@ -65,7 +66,7 @@ if (t > T)
         c   = N * HL_bar / pi / 1;
         wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
         FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:200
+        for mz = 2:mode_number
                  c  = N * HL_bar / pi / mz;
                 bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
                 bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
@@ -74,6 +75,7 @@ if (t > T)
         ww   = ww - wwp;
 end
 
+% Y = round(X)
 
 Q   = 1;        % Scale factor on total vertical velocity
 ww  = Q * ww; 

@@ -13,12 +13,12 @@ delta_diff   = [1:1:100];
 % [ xx, zz, psi, ww ] = series_half_sinusoid_plots_4(HL_bar , HV_bar, t, T, sigma);
 % w1_row              = ww(30,:);
 for i = 1:100
-    HL_bar  = 20 +  i;
-    [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
+    HL_bar  = 19.992 + i;
+    [ xx, zz, psi, ww ] = series_half_sinusoid_plots_4(HL_bar , HV_bar, t, T, sigma);
     w1_row              = ww(30,:);
 
     HL_bar  = HL_bar + 1;
-    [ xx, zz, psi, ww ] = series_half_sinusoid_plots_3(HL_bar , HV_bar, t, T, sigma);
+    [ xx, zz, psi, ww ] = series_half_sinusoid_plots_4(HL_bar , HV_bar, t, T, sigma);
     w2_row               = ww(30,:);
 
     delta_w          = w1_row - w2_row;
