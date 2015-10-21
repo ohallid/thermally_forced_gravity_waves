@@ -1,0 +1,348 @@
+\documentclass[12pt]{article}
+
+\usepackage{cite}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{graphics}
+\usepackage{graphicx}
+
+\DeclareMathOperator\erf {erf}
+
+
+\bibliographystyle{plain}
+
+\begin{document}
+
+\begin{titlepage}
+
+\vfill \LARGE
+\begin{center}
+Potential Tempertature Investigations, Parker and Burton System
+\large
+
+\rule{0mm}{20mm}
+
+O. J.  Halliday, S. D. Griffith,  D. Parker,
+
+ \vspace{3mm} {\em University of Leeds}
+
+
+%\rule{40mm}{0.2mm}
+
+
+
+\end{center}
+
+\pagestyle{empty}
+\end{titlepage}
+%
+%
+%
+\section{Preliminary Results and Error Function Properties}
+\label{sec_lemma}
+%
+We shall need to evaluate integrals $I$ with the following form:
+%
+\begin{equation}
+I (t,T,c)= \int_0^t H(t'-T) \exp \left(- \frac{(\xi - c t')^2 }{ 2 \sigma^2} \right) dt', \quad \forall t>0.
+\end{equation}
+%
+Using the defintion of the Heavyside function $I$ may be written :
+%
+\begin{equation}
+I (t,T,c)= H(t-T) \int_T^t \exp \left(- \frac{(\xi - c t')^2 }{ 2 \sigma^2} \right) dt', \quad \forall t>0,
+\end{equation}
+%
+which, on using the substitution $u = \frac{ct'-\xi}{\sqrt{2} \sigma}$ transforms to :
+%
+\begin{equation}
+I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c } \int_{ \frac{cT-\xi}{\sqrt{2} \sigma}}^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du, \quad \forall t>0.
+\end{equation}
+%
+In order to appeal to the definition of the error function we must transform the right hand side in the above:
+%
+\begin{equation}
+I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c }\left(  \int_{ \frac{cT-\xi}{\sqrt{2} \sigma}}^0 \exp \left(- u^2 \right) du +  \int_0^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du \right) .
+\end{equation}
+%
+Reversing limits in the first term on teh right hand side:
+%
+\begin{equation}
+I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c }\left(  - \int_0^{ \frac{cT-\xi}{\sqrt{2} \sigma}} \exp \left(- u^2 \right) du +  \int_0^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du \right) .
+\end{equation}
+%
+Employing the defintion of the error function we may obtain an expression for the integrals in the above:
+%
+\begin{equation}
+\erf (x) \equiv  \frac{ 2 }{\sqrt{ \pi } } \int_0^x \exp \left(- u^2 \right) du \iff  \int_0^x \exp \left(- u^2 \right) du = \frac{\sqrt{\pi}}{2} \erf(x),
+\end{equation}
+%
+we easily obtain the following:
+%
+\begin{equation}
+I (t,T,c) = H(t-T) \sqrt{ \frac{\pi}{2} } \frac{ \sigma }{ c }\left( - \erf \left( \frac{cT-\xi}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-\xi}{\sqrt{2} \sigma} \right)    \right) .
+\end{equation}
+%
+We note some results which will be useful in what follows. 
+
+First, the error function is an odd function of its argument:
+%
+\begin{equation}
+\erf(-x) = - \erf(x).
+\end{equation}
+
+Second, set $T=0$ and use that fact to obtain:
+%
+\begin{equation}
+I (t,0,c) = \sqrt{ \frac{\pi}{2} } \frac{ \sigma }{ c } \left(  \erf \left( \frac{\xi}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-\xi}{\sqrt{2} \sigma} \right)    \right) .
+\end{equation}
+%
+
+Third, change the sign of $c$ (i.e. $c \rightarrow (-c) $ ) to obtain:
+%
+\begin{eqnarray}
+\label{equ_property1}
+I (t,0,-c) & = & \sqrt{ \frac{\pi}{2} } \frac{ \sigma }{(- c) }\left(  \erf \left( \frac{\xi}{\sqrt{2} \sigma} \right) + \erf \left( \frac{- ct-\xi}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& = &  \sqrt{ \frac{\pi}{2} } \frac{ \sigma }{ c }\left( -  \erf \left( \frac{\xi}{\sqrt{2} \sigma} \right) + \erf \left( \frac{ct+\xi}{\sqrt{2} \sigma} \right)    \right)
+\end{eqnarray}
+%
+\section{Potential Temperature for a System with Transient Heating}
+\label{sec_bresponse}
+%
+%
+%
+We note that a steady response is a special case of a transient response. We therefore exploit previous experience and consider the unsteady directly.
+We shall assume a time variation of heating as:
+%
+\begin{equation}
+ H(t) - H(t-T) 
+\end{equation}
+%
+Throughout we shall consider the Parker and Burton system and assume $s=0$ (heat source is stationary) and $n=f=0$.
+Also, we shall assume that the horizontal variation of heating is given by:
+%
+\begin{equation}
+F(x) \equiv \exp \left( - \frac{x^2}{2 \sigma^2 } \right).
+\end{equation}
+%
+%
+%
+\subsection{ Previous Work, Steady Heating $w$-Response}
+%
+The steady response, $w_{m_z}$, to the $m_z$ mode of a steady (constant) heating function in a Parker and Burton systemmay be written:
+%
+\begin{equation}
+\frac{w_{m_z} }{Q} = \frac{H^2}{m_z^2 \pi^2} \left( \frac{F(x)}{c^2} - \frac{1}{2} \frac{F(x-ct)}{c^2 } - \frac{1}{2} \frac{F(x+ct)}{ c^2}   \right) \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+where:
+%
+\begin{equation}
+ c = \frac{N H}{ m_z \pi }, \quad m_z \in \mathbb{Z}.
+\end{equation}
+%
+The above may be simplified:
+%
+\begin{equation}
+\frac{w_{m_z} }{Q} = \frac{1}{N^2} \left( F(x) - \frac{1}{2} F(x-ct)  - \frac{1}{2} F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+For a steady heating function:
+%
+\begin{equation}
+S(x,z,t) =Q H(t) F(x) \sum_{m_z=1}^{\infty} b_{m_z} \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+the aggregate $w$-response is obtained by superposing modes:
+%
+\begin{equation}
+\frac{w }{Q} = \frac{1}{N^2}  \sum_{m_z = 1}^{\infty} b_{m_z} \left( F(x) - \frac{1}{2} F(x-ct)  - \frac{1}{2} F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+which can be written, note:
+%
+\begin{equation}
+\frac{w }{Q} =  \frac{S_0}{Q N^2} - \frac{1}{2 N^2}  \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-ct) + F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+where we have defined:
+%
+\begin{equation}
+S_0 (x,z)  \equiv Q F(x) \sum_{m_z=1}^{\infty} b_{m_z} \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+%
+\subsection{ Previous Work, Unsteady Heating $w$-Response}
+%
+%
+%
+Let us now consider transient heating, still with $s=0$, $n = f = 0$. Using a Fourier series expansion to express the vertical variation, a transient heating function of duration $T$ is:
+%
+\begin{equation}
+\label{equ_1}
+S(x,z,t) =Q (H(t) - H(t-T) ) F(x) \sum_{m_z=1}^{\infty} b_n \sin \left( \frac{m_z \pi} {H} z\right),
+\end{equation}
+
+Using the delay theorem of Laplace transforms, the corresponding $w$-response may be computed:
+%
+\begin{eqnarray}
+\label{equ_2}
+\frac{w }{Q} & = & \frac{S_0}{Q N^2} - \frac{1}{2 N^2}  \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-ct)  + F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& - & \frac{S_0}{Q N^2}  H(t-T) \\ \nonumber
+& + & \frac{1}{2 N^2} H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-c(t-T)) + F(x+c(t-T))   \right) \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+\end{eqnarray}
+%
+%
+%
+\subsection{ Unsteady Heating $b$-Response}
+%
+Using equation (4) of Parker and Burton, the $b$-response may be written:
+%
+\begin{equation}
+\frac{\partial  }{ \partial t } \left(  \frac{b}{Q} \right) =  \frac{S}{Q} - N^2 \frac{w}{Q},
+\end{equation}
+%
+which, on using equations \ref{equ_1} and \ref{equ_2} gives:
+%
+\begin{eqnarray}
+\frac{\partial  }{\partial t} \left( \frac{b}{Q} \right) & = &  F(x) \sum_{m_z=1}^{\infty} b_n \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& - & H(t-T) F(x) \sum_{m_z=1}^{\infty} b_n \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& - & \frac{S_0}{Q} \\ \nonumber 
+& +& \frac{1}{2}  \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-ct)  + F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& + &H(t-T)  \frac{S_0}{Q}  \\ \nonumber
+& - & \frac{1}{2} H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-c(t-T)) + F(x+c(t-T))   \right) \sin \left( \frac{m_z \pi} {H} z\right), \\ \nonumber
+\end{eqnarray}
+%
+where we have suppressed a factor $H(t)$ in the first term, note. 
+Consider the right hand side of the above. Using the definition of $S_0$ above the first and third cancel, as do the second and fifth:
+%
+\begin{eqnarray}
+\frac{\partial  }{\partial t} \left( \frac{b}{Q} \right) & = & \frac{1}{2} H(t) \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(x-ct) + F(x+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right) \\ \nonumber
+& - & \frac{1}{2} H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z} \left(F(\xi-ct)  + F( \xi'+ct)   \right) \sin \left( \frac{m_z \pi} {H} z\right),  \\ \nonumber
+\end{eqnarray}
+%
+where we have defined: 
+%
+\begin{equation}
+\xi = x + cT, \quad \xi' = x - cT,
+\end{equation}
+%
+and, recall $F(x) \equiv \exp \left( - \frac{x^2}{2 \sigma^2 } \right)$.  Integrating on $t$ now:
+
+%
+\begin{eqnarray}
+\frac{b}{Q}  & = & \frac{1}{2} \sum_{m_z = 1}^{\infty} b_{m_z}\sin \left( \frac{m_z \pi} {H} z\right)\int_0^t H(t') \exp \left( - \frac{ (x-ct')^2 }{2 \sigma^2 } \right) dt'  \\ \nonumber
+& + & \frac{1}{2} \sum_{m_z = 1}^{\infty} b_{m_z}  \sin \left( \frac{m_z \pi} {H} z\right) \int_0^t H(t') \exp \left( - \frac{ (x+ct')^2 }{2 \sigma^2} \right) dt' \\ \nonumber
+& - & \frac{1}{2} \sum_{m_z = 1}^{\infty} b_{m_z} \sin \left( \frac{m_z \pi} {H} z\right) \int_0^t H(t'-T) \exp \left( - \frac{ (\xi-ct')^2 }{2 \sigma^2} \right) dt'  \\ \nonumber
+& - & \frac{1}{2} \sum_{m_z = 1}^{\infty} b_{m_z}  \sin \left( \frac{m_z \pi} {H} z\right) \int_0^t  H(t'-T) \exp \left( - \frac{ ( \xi'+ct')^2 }{2 \sigma ^2} \right) dt', \\ \nonumber
+\end{eqnarray}
+%
+where we have used the initial condition that $b=0$ at $t=0$. Then, using the results in section \ref{sec_lemma}, we have:
+%
+\begin{eqnarray}
+\label{equ_ref}
+\frac{b}{Q}  & = & \frac{\sigma}{2} \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{ c }\sin \left( \frac{m_z \pi} {H} z\right) \left(  \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& + & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }  \sum_{m_z = 1}^{\infty} b_{m_z} \frac{ 1 }{ c } \sin \left( \frac{m_z \pi} {H} z\right)\left( - \erf \left( \frac{x}{\sqrt{2} \sigma} \right) + \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
+& - & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1 }{ c }  \sin \left( \frac{m_z \pi} {H} z\right) \left(- \erf \left( \frac{cT-\xi}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-\xi}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& - & \frac{\sigma }{2} \sqrt{ \frac{\pi}{2} }H(t-T)  \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1}{ c }  \sin \left( \frac{m_z \pi} {H} z\right) \left(- \erf \left( \frac{cT+\xi'}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct +\xi'}{\sqrt{2} \sigma} \right)    \right), \\ \nonumber
+\end{eqnarray}
+%
+where, e.g. in the second line on the right hand side we have used property \ref{equ_property1}. 
+%
+%
+%
+\subsubsection{Matlab Code}
+%
+Now, the Matlab code uses the above result as follows. Substitute for $\xi$ and $\xi'$:
+%
+\begin{eqnarray}
+\frac{b}{Q}  & = & \frac{\sigma}{2} \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{ c }\sin \left( \frac{m_z \pi} {H} z\right) \left(  \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& + & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }  \sum_{m_z = 1}^{\infty} b_{m_z} \frac{ 1 }{ c } \sin \left( \frac{m_z \pi} {H} z\right)\left( - \erf \left( \frac{x}{\sqrt{2} \sigma} \right) + \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
+& - & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1 }{ c }  \sin \left( \frac{m_z \pi} {H} z\right) \left(- \erf \left( \frac{-x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T)-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& - & \frac{\sigma }{2} \sqrt{ \frac{\pi}{2} }H(t-T)  \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1}{ c }  \sin \left( \frac{m_z \pi} {H} z\right) \left(- \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T) + x}{\sqrt{2} \sigma} \right)   \right), \\ \nonumber
+\end{eqnarray}
+%
+and use the symmetry properties of the error function:
+%
+\begin{eqnarray}
+\frac{b}{Q}  & = & \frac{\sigma}{2} \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{ c }\sin \left( \frac{m_z \pi} {H} z\right) \left(  \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& + & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }  \sum_{m_z = 1}^{\infty} b_{m_z} \frac{ 1 }{ c } \sin \left( \frac{m_z \pi} {H} z\right)\left( - \erf \left( \frac{x}{\sqrt{2} \sigma} \right) + \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
+& - & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1 }{ c }  \sin \left( \frac{m_z \pi} {H} z\right) H(t-T)\left( \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T)-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& - & \frac{\sigma }{2} \sqrt{ \frac{\pi}{2} }  \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1}{ c }  \sin \left( \frac{m_z \pi} {H} z\right) H(t-T)\left(- \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T) + x}{\sqrt{2} \sigma} \right)    \right), \\ \nonumber
+\end{eqnarray}
+%
+and collect terms, adding another factor of $\sigma$ to conserve total heating input (see below):
+%
+\begin{equation}
+\frac{b}{Q}  = \frac{\sigma^2}{2} \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{ c }\sin \left( \frac{m_z \pi} {H} z\right) \left( F_1 (c) - F_1 (-c) \right) 
+\end{equation}
+%
+where:
+%
+\begin{eqnarray}
+F_1(c)  & \equiv & \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right) \\ \nonumber
+& - &  H(t-T) \left( \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T)-x}{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
+\end{eqnarray}
+%
+%
+%
+\subsubsection{Compact Expression for $b$-Response}
+%
+To obtain a compact expression for $b$ let us return to equation \ref{equ_ref}. Cancelling terms and substituting for $\xi$ and $\xi'$:
+%
+\begin{eqnarray}
+ \frac{2}{\sigma} \sqrt{ \frac{2} {\pi}} \frac{b}{Q}  & = &\sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{c} \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)   \\ \nonumber
+& + &\sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{c}  \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right) \\ \nonumber
+& - & H(t-T) \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{c} \sin \left( \frac{m_z \pi} {H} z\right) \left( - \erf \left( \frac{cT- x - cT}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x-cT}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& - & H(t-T)  \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1}{c} \sin \left( \frac{m_z \pi} {H} z\right) \left( - \erf \left( \frac{cT+x-cT}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct +x-cT}{\sqrt{2} \sigma} \right)    \right), \\ \nonumber
+\end{eqnarray}
+%
+it is possible to simplify the above further I THINK (CHECKING). Recalling that the error function is an odd function:
+%
+\begin{eqnarray}
+ \frac{2}{\sigma} \sqrt{ \frac{2} {\pi}} \frac{b}{Q}  & = &\sum_{m_z = 1}^{\infty}\frac{ b_{m_z}}{c}\sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)   \\ \nonumber
+& + &\sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right) \\ \nonumber
+& - & H(t-T) \sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) \left( \erf \left( \frac{ x }{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x-cT}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
+& - & H(t-T)  \sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) \left( - \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct +x-cT}{\sqrt{2} \sigma} \right)    \right), \\ \nonumber
+\end{eqnarray}
+%
+whereupon we can gain another cancellation:
+%
+\begin{eqnarray}
+ \frac{2}{\sigma} \sqrt{ \frac{2} {\pi}} \frac{b}{Q}  & = &\sum_{m_z = 1}^{\infty}\frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)   \\ \nonumber
+& + &\sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c}  \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right) \\ \nonumber
+& - & H(t-T) \sum_{m_z = 1}^{\infty}\frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct-x-cT}{\sqrt{2} \sigma} \right)  \\ \nonumber
+& - & H(t-T)  \sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c}  \sin \left( \frac{m_z \pi} {H} z\right) \erf \left( \frac{ct +x-cT}{\sqrt{2} \sigma} \right). \\ \nonumber
+\end{eqnarray}
+%
+Finally, for the simplified potential temperature response, we have:
+%
+\begin{eqnarray}
+ \frac{b}{Q}  & = & \frac{\sigma}{2} \sqrt{ \frac {\pi} {2}}  \sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) G(c,x,t)    \\ \nonumber
+ & - & H(t-T) \frac{\sigma }{2} \sqrt{ \frac {\pi} {2}}  \sum_{m_z = 1}^{\infty}\frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) G(c,x,(t-T)), \\ \nonumber
+ \end{eqnarray}
+%
+where:
+%
+\begin{equation}
+ G(c,x,t)  \equiv \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right) .
+\end{equation}
+%
+Note that to conserve the heating rate when $\sigma$ is varied:
+%
+\begin{equation}
+F(x) \rightarrow \sigma \exp \left( - \frac{x^2}{2 \sigma^2 } \right), 
+\end{equation}
+%
+whereupon the $b$-response acquires an additional factor $\sigma$:
+%
+\begin{eqnarray}
+ \frac{b}{Q}  & = & \frac{\sigma^2}{2} \sqrt{ \frac {\pi} {2}}  \sum_{m_z = 1}^{\infty} \frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) G(c,x,t)    \\ \nonumber
+ & - & H(t-T) \frac{\sigma^2}{2} \sqrt{ \frac {\pi} {2}} \sum_{m_z = 1}^{\infty}\frac{ b_{m_z}}{c} \sin \left( \frac{m_z \pi} {H} z\right) G(c,x,(t-T)), \\ \nonumber
+ \end{eqnarray}
+%
+
+
+\end{document}
