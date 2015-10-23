@@ -62,16 +62,11 @@ which, on using the substitution $u = \frac{ct'-\xi}{\sqrt{2} \sigma}$ transform
 I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c } \int_{ \frac{cT-\xi}{\sqrt{2} \sigma}}^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du, \quad \forall t>0.
 \end{equation}
 %
-In order to appeal to the definition of the error function we must transform the right hand side in the above:
+Clearly we need only consider the case of $t>T$. For $t>T$ it follows that the upper limit in the above definite integral is always greater than the lower limit,
+for $\xi > 0$ and $\xi<0$. Hence we can write:
 %
 \begin{equation}
-I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c }\left(  \int_{ \frac{cT-\xi}{\sqrt{2} \sigma}}^0 \exp \left(- u^2 \right) du +  \int_0^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du \right) .
-\end{equation}
-%
-Reversing limits in the first term on teh right hand side:
-%
-\begin{equation}
-I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c }\left(  - \int_0^{ \frac{cT-\xi}{\sqrt{2} \sigma}} \exp \left(- u^2 \right) du +  \int_0^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du \right) .
+I (t,T,c) = H(t-T) \frac{\sqrt{2} \sigma }{ c }\left( \int_0^{ \frac{ct-\xi}{\sqrt{2} \sigma} } \exp \left(- u^2 \right) du  - \int_0^{ \frac{cT-\xi}{\sqrt{2} \sigma}} \exp \left(- u^2 \right) du\right) .
 \end{equation}
 %
 Employing the defintion of the error function we may obtain an expression for the integrals in the above:
@@ -267,6 +262,7 @@ Now, the Matlab code uses the above result as follows. Substitute for $\xi$ and 
 and use the symmetry properties of the error function:
 %
 \begin{eqnarray}
+\label{equ_Matlab}
 \frac{b}{Q}  & = & \frac{\sigma}{2} \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z} \frac{1}{ c }\sin \left( \frac{m_z \pi} {H} z\right) \left(  \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
 & + & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} }  \sum_{m_z = 1}^{\infty} b_{m_z} \frac{ 1 }{ c } \sin \left( \frac{m_z \pi} {H} z\right)\left( - \erf \left( \frac{x}{\sqrt{2} \sigma} \right) + \erf \left( \frac{ct+x }{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
 & - & \frac{\sigma}{2}  \sqrt{ \frac{\pi}{2} } \sum_{m_z = 1}^{\infty} b_{m_z}  \frac{1 }{ c }  \sin \left( \frac{m_z \pi} {H} z\right) H(t-T)\left( \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T)-x}{\sqrt{2} \sigma} \right)    \right)  \\ \nonumber
@@ -285,6 +281,14 @@ where:
 F_1(c)  & \equiv & \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{ct-x}{\sqrt{2} \sigma} \right) \\ \nonumber
 & - &  H(t-T) \left( \erf \left( \frac{x}{\sqrt{2} \sigma} \right) +  \erf \left( \frac{c(t-T)-x}{\sqrt{2} \sigma} \right)    \right) \\ \nonumber
 \end{eqnarray}
+
+Note the presence of the factor $\frac{1}{c}$ in the summation in equation \ref{equ_Matlab} , where, recall:
+%
+\begin{equation}
+c = \frac{N H}{ m_z \pi}, \quad m_z \in mathbb{Z}.
+\end{equation}
+%
+There are no corresponding factors in $c$ in the $w$-response. 
 %
 %
 %

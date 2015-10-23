@@ -1,77 +1,80 @@
-% Calculates and plots 2 Hovmoller for 2 configured Lid Heights, as well as
-% a Hovmoller of the difference
-% Config list: 2 x HL_bar, t, data height, time step, sigma, T, N. 
+% two narrow heat sources superposed sub GCM grid scale with on off(?)
+function [ total_w1, total_w2, total_w3, total_w4 ] = double_heat_2(HL_bar, T, T1, sigma, x_0)       
 
-%function [x1, t1, xx1, tt, ww, w_trop        ]  = Hovmoller()        % surf
-%function [ w_trop0_diff, w_trop1_diff, w_trop2_diff , w_trop3_diff] = Hovmoller_diff()       % contour
-function [ w_trop0p ] = Hovmoller_diff_centered()
-
-%HL_bar       = 19.992;
+%HL_bar       = 99.992;
+HL_bar       = 100;
 HV_bar       = 20.005;
-%T            = 10000;
+% T            = 5000;
+% T1           = 8000;
 x1           = [0:0.1:100];
 t1           = [0:250:10000];
 [xx1, tt]    = meshgrid(x1,  t1);
-%sigma        = 5;
+sigma        = 1;
 N            = 0.01;
+ 
 
-for j = 1:1
-    t = 0;
-    for i = 1:1:41
-        HL_bar      = 99.993 ;
-        x_0         = 50;
-        sigma       = 5;
-        T           = 3600;
-        T1          = 0;
-        T2          = 0;
-        Q           = 1;
-        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, t, T, T1, T2, sigma, x_0);
-        w_ext0               = ww(2,:);
-        w_trop0(i,:)         = w_ext0(:);
-        w_ext1               = ww(10,:);
+
+t = 0;
+for i = 1:1:41
+    x_0  = 45;
+    T    = 0;
+    T1   = 3600;
+    T2   = 7200;
+   [ xx, zz, psi, ww1 ] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, t, T, T1,T2, sigma, x_0);
+         % ww1  = ww1 / 2 ;
+        w_ext1               = ww1(2,:);
         w_trop1(i,:)         = w_ext1(:);
-        w_ext2               = ww(20,:);
+        w_ext2               = ww1(10,:);
         w_trop2(i,:)         = w_ext2(:);
-        w_ext3               = ww(30,:);
+        w_ext3               = ww1(20,:);
         w_trop3(i,:)         = w_ext3(:);
+        w_ext4               = ww1(30,:);
+        w_trop4(i,:)         = w_ext4(:);
         t = t + 250;
-    end
-    t = 0;
-    for k = 1:1:41
-        HL_bar = HL_bar ;
-        x_0         = 50;
-        sigma       = 5;
-        T           = 5350;
-%         T1          = 2250;
-%         T2          = 150000;
-        Q           = 4;
-        [ xx, zz, psi, ww ] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, t, T, T1, T2, sigma, x_0);
-        ww          = Q * ww;
-        w_ext0p               = ww(2,:);
-        w_trop0p(k,:)         = w_ext0p(:);
-        w_ext1p               = ww(10,:);
-        w_trop1p(k,:)         = w_ext1p(:);
-        w_ext2p               = ww(20,:);
-        w_trop2p(k,:)         = w_ext2p(:);
-        w_ext3p               = ww(30,:);
-        w_trop3p(k,:)         = w_ext3p(:);
+end
+t = 0; 
+for j = 1:1:41
+    x_0  = 55;
+    T    = 3600;
+    T1   = 7200;
+    T2   = 1000000;
+    [ xx, zz, psi, ww2 ] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, t, T, T1,T2, sigma, x_0);
+         %ww2  = ww2 / 2 ;
+        w_ext1p               = ww2(2,:);
+        w_trop1p(j,:)         = w_ext1p(:);
+        w_ext2p               = ww2(10,:);
+        w_trop2p(j,:)         = w_ext2p(:);
+        w_ext3p               = ww2(20,:);
+        w_trop3p(j,:)         = w_ext3p(:);
+        w_ext4p               = ww2(30,:);
+        w_trop4p(j,:)         = w_ext4p(:);
         t = t + 250;
-    end
-    delta_w0          = w_trop0p - w_trop0;
-    w_trop0_diff      = delta_w0 .* delta_w0;
-    w_trop0_diff      = sqrt(w_trop0_diff);
+end
+
+% Superpose w responses
+total_w1          = w_trop1p + w_trop1;
+total_w2          = w_trop2p + w_trop2;
+total_w3          = w_trop3p + w_trop3;
+total_w4          = w_trop4p + w_trop4;
+
+
+
+% collect differences
+delta_w0          = w_trop0p - w_trop0;
+w_trop0_diff      = delta_w0 .* delta_w0;
+w_trop0_diff      = sqrt(w_trop0_diff);
     
-    delta_w1          = w_trop1p - w_trop1;
-    w_trop1_diff      = delta_w1 .* delta_w1;
-    w_trop1_diff      = sqrt(w_trop1_diff);
+delta_w1          = w_trop1p - w_trop1;
+w_trop1_diff      = delta_w1 .* delta_w1;
+w_trop1_diff      = sqrt(w_trop1_diff);
     
-    delta_w2          = w_trop2p - w_trop2;
-    w_trop2_diff      = delta_w2 .* delta_w2;
-    w_trop2_diff      = sqrt(w_trop2_diff);
+delta_w2          = w_trop2p - w_trop2;
+w_trop2_diff      = delta_w2 .* delta_w2;
+w_trop2_diff      = sqrt(w_trop2_diff);
     
-    delta_w3          = w_trop3p - w_trop3;
-    w_trop3_diff      = delta_w3 .* delta_w3;
-    w_trop3_diff      = sqrt(w_trop3_diff);
+delta_w3          = w_trop3p - w_trop3;
+w_trop3_diff      = delta_w3 .* delta_w3;
+w_trop3_diff      = sqrt(w_trop3_diff);
 
     
 % Hovmoller 1    
@@ -215,7 +218,6 @@ h(4) = subplot(4,1,4) ;
 xx1 = xx1 ;
 %tt  = tt * pi * sigma / N / HL_bar ; 
 contourf(xx1 , tt, delta_w0);
-
 colorbar
 title('w at 1km')
 caxis([ -3 3])
@@ -224,6 +226,18 @@ ylabel('Time (s)')
 xlim([25 75])
 ylim([0 10000])
 % end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

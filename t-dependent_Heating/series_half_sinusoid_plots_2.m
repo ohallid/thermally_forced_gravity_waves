@@ -1,4 +1,4 @@
-function [ xx, zz, psi, ww] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, t, T, T1,T2, sigma, x_0)
+function [ xx, zz, psi, ww ] = series_half_sinusoid_plots(HL_bar , HV_bar, t)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -20,16 +20,15 @@ function [ xx, zz, psi, ww] = series_half_sinusoid_plots_onoff(HL_bar , HV_bar, 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-pi      = 3.14159265359;
+pi      = 3.1415;
 Ht_bar  = 1 / HL_bar;
 H_bar   = 1 / HL_bar;
-dx      = 0.1;         % x-step
-dz      = 0.1;         % z-step
-x       = [0:dx:2400 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+dx      = 0.005;         % x-step
+dz      = 0.015;         % z-step
+x       = [0:dx:10 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];
-%x_0     = 0;             % initial position of heating function, middle of box
-s       = 0.00;             
-%s       = 0.006;
+x_0     = 0;             % initial position of heating function, middle of box
+s       = 0;             
 n       = 1;             % Number of half-sinusoids in interval
 N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
 [xx,zz] = meshgrid( x, z);
@@ -43,73 +42,20 @@ N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% H(t) terms
 mz = 1;
 b1 = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
 b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
 c  = N * HL_bar / pi / 1;
-ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar, sigma ) ;
+ww = M2(b1, mz, c, s, x, x_0, z, t, H_bar ) ;
 FS = b1 * sin ( pi * 1 .* z * H_bar );
-mode_number = 2 * HL_bar;
-for mz = 2:mode_number
+for mz = 2:100
     c  = N * HL_bar / pi / mz;
     bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
     bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-    ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar, sigma );
+    ww = ww + M2(bm, mz, c, s, x, x_0, z, t, H_bar );
     FS = FS + bm * sin ( pi * mz .* z .* H_bar );
 end 
 
-% H(t - T) terms if needed
-    if (t > T)
-        mz  = 1;
-        b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
-        b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-        c   = N * HL_bar / pi / 1;
-        wwp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
-        FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:mode_number
-                 c  = N * HL_bar / pi / mz;
-                bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-                bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-                wwp = wwp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
-        end
-       ww   = ww - wwp; 
-    end
-        
-    
-% H(t + T1) terms if needed
-    if (t > T1)
-        mz  = 1;
-        b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
-        b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-        c   = N * HL_bar / pi / 1;
-        wwpp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
-        FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:mode_number
-                 c  = N * HL_bar / pi / mz;
-                bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-                bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-                wwpp = wwpp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
-        end  
-     ww   = ww + wwpp;
-    end
-
-    % H(t - T2) terms if needed
-if (t > T2)
-        mz  = 1;
-        b1  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) );                       % square step
-        b1  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-        c   = N * HL_bar / pi / 1;
-        wwppp = M2(b1, mz, c, s, x, x_0, z, t-T , H_bar , sigma) ;
-        FS  = b1 * sin ( pi * 1 .* z * H_bar );
-        for mz = 2:100
-                 c  = N * HL_bar / pi / mz;
-                bm  = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                  % square step
-                bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );
-                wwppp = wwppp + M2(bm, mz, c, s, x, x_0, z, t-T , H_bar , sigma);
-        end  
-     ww   = ww - wwppp;
-    end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

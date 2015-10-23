@@ -1,4 +1,4 @@
-function [ ww, bb, FS, xx, zz ] = series_half_sinusoidp_w_b(HL_bar, HV_bar , t, T)
+function [ ww, bb, FS, xx, zz ] = series_half_sinusoidp_w_b(HL_bar, HV_bar , t, T, sigma)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -9,17 +9,17 @@ function [ ww, bb, FS, xx, zz ] = series_half_sinusoidp_w_b(HL_bar, HV_bar , t, 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Ht_bar  = 1 / HL_bar;    % Ratio, height to top of heating
-sigma   = 1;             % FWHM of horixontal heating vatiation
-dx      = 0.05;          % x-step
-dz      = 0.051;         % z-step
-x       = [0:dx:10 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+%sigma   = 1;             % FWHM of horixontal heating vatiation
+dx      = 0.1;          % x-step
+dz      = 0.1;         % z-step
+x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];     % z = 1  equivalent to H_t, H >> H_t is lid position
 x_0     = 0;             % initial position of heating function, middle of box
 s       = 0;             
 n       = 1;             % Number of half-sinusoids in interval
 N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes) Units s^{-1}
 [xx,zz] = meshgrid( x, z);
-mz_max  = 60 * HL_bar;   % Number of modes calculated : depends on HL_bar
+mz_max  = 50 * HL_bar;   % Number of modes calculated : depends on HL_bar
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
