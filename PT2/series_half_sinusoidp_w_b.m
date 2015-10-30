@@ -12,7 +12,7 @@ Ht_bar  = 1 / HL_bar;    % Ratio, height to top of heating
 sigma   = 1;             % FWHM of horixontal heating vatiation
 dx      = 0.1;          % x-step
 dz      = 0.1;         % z-step
-x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+x       = [-100:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];     % z = 1  equivalent to H_t, H >> H_t is lid position
 x_0     = 0;             % initial position of heating function, middle of box
 s       = 0;             
@@ -34,7 +34,7 @@ c  = N * HL_bar / 1 / pi;
 ww = M2(b1, mz, c, x, x_0, z, t, T, HL_bar, sigma ) ;
 bb = M3(b1, mz, c, x, x_0, z, t, T, HL_bar, sigma ) ;
 FS = b1 * sin ( pi * 1 .* z / HL_bar );
-for mz = 2:5
+for mz = 2:1000
     c  = N * HL_bar / pi / mz;
     bm = 2 / mz / pi * ( 1.0 - cos( mz * pi * Ht_bar ) ) ;                                                      % square step                   
     bm  = 2 * Ht_bar / pi * (-1)^(n+1) * sin ( mz * pi * Ht_bar ) * n / ( n * n - Ht_bar * Ht_bar * mz * mz );  % half-sinusoid
