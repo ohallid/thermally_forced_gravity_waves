@@ -1,12 +1,13 @@
-function[f] = F2(x,x_0,s,t, sigma)
+function[f] = F2(x, x_0, c, t, T, sigma )
+ 
+% Heavyside function
+H     = 0;
+if ( t > T )
+    H = 1;
+end
 
-% sigma = FWHM 
-
-% sigma = 1;
-
-% determine middle of x range
-
-f     = exp(- ( x - x_0 - s * t) .* ( x - x_0 - s * t) / sigma / sigma / 2 ) / sigma; % / sigma to conserve total heating
-% plot(x,f);
+f1     = exp(- ( x -x_0 - c * t         ) .* ( x - x_0 - c * t        ) / 2 / sigma / sigma );
+f2     = exp(- ( x -x_0 - c * ( t - T ) ) .* ( x - x_0 - c * ( t - T) ) / 2 / sigma / sigma );
+f      = f1 - H * f2;
 
 return
