@@ -6,11 +6,11 @@ function [ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_
 % ww(1,:) corresponds to x = 0 
 
 Ht_bar  = 1 / HL_bar;    % Ratio, height to top of heating
-dx      = 0.05;          % x-step
-dz      = 0.051;         % z-step
-x       = [0:dx:20 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+dx      = 0.1;          % x-step
+dz      = 0.1;         % z-step
+x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];     % z = 1  equivalent to H_t, H >> H_t is lid position
-x_0     = 0;             % initial position of heating function, middle of box
+x_0     = 50;             % initial position of heating function, middle of box
 s       = 0;             
 n       = 1;             % Number of half-sinusoids in interval
 N       = 0.01;          % Based on dry lapse rate of 10 deg per km (notes) Units s^{-1}
