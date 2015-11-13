@@ -7,7 +7,7 @@
 function [ xx1,tt, b_trop3  ] = Hovmoller_diff()
 
 %HL_bar       = 19.992;
-HV_bar       = 20.005;
+HV_bar       = 20.00;
 %T            = 10000;
 x_0          = 0;
 x1           = [0:0.1:100];
@@ -21,18 +21,18 @@ mz_max       = 1000;
 for j = 1:1
     t = 0;
     for i = 1:1:61
-        HL_bar      = 19.993 ;
-        sigma       = 5;
-        T           = 15000;
+        HL_bar      = 63.993 ;
+        sigma       = 1;
+        T           = 1000;
         Q           = 1;
         [ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, mz_max );
         b_ext0               = bb(2,:);
         b_trop0(i,:)         = b_ext0(:);
-        b_ext1               = bb(10,:);
+        b_ext1               = bb(5,:);
         b_trop1(i,:)         = b_ext1(:);
-        b_ext2               = bb(20,:);
+        b_ext2               = bb(10,:);
         b_trop2(i,:)         = b_ext2(:);
-        b_ext3               = bb(30,:);
+        b_ext3               = bb(15,:);
         b_trop3(i,:)         = b_ext3(:);
         t = t + 250;
     end
@@ -40,17 +40,17 @@ for j = 1:1
     for k = 1:1:61
         HL_bar = HL_bar ;
         sigma       = 1;
-        T           = 15000;
-        Q           = 1;
+        T           = 500;
+        Q           = 2;
         [ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, mz_max );
         bb          = Q * bb;
         b_ext0p               = bb(2,:);
         b_trop0p(k,:)         = b_ext0p(:);
-        b_ext1p               = bb(10,:);
+        b_ext1p               = bb(5,:);
         b_trop1p(k,:)         = b_ext1p(:);
-        b_ext2p               = bb(20,:);
+        b_ext2p               = bb(10,:);
         b_trop2p(k,:)         = b_ext2p(:);
-        b_ext3p               = bb(30,:);
+        b_ext3p               = bb(15,:);
         b_trop3p(k,:)         = b_ext3p(:);
         t = t + 250;
     end
@@ -80,8 +80,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop3);
 colorbar
-%caxis([ -200 200])
-title('w at 15km')
+caxis([ -5 5])
+title('PT at 15km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -93,9 +93,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop2);
 colorbar
-%caxis([ -3 3])
-%caxis([ -200 200])
-title('w at 10km')
+caxis([ -5 5])
+title('PT at 10km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -107,9 +106,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop1);
 colorbar
-title('w at 5km')
-%caxis([ -3 3])caxis([ -200 200])
-%caxis([ -200 200])
+title('PT at 5km')
+caxis([ -5 5])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -122,9 +120,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop0);
 colorbar
-title('w at 1km')
-%caxis([ -3 3])
-%caxis([ -200 200])
+title('PT at 1km')
+caxis([ -5 5])
 xlabel('Distance (km)')
 ylabel('time')
 xlim([0 100])
@@ -140,9 +137,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop3p);
 colorbar
-%caxis([ -3 3])
-%caxis([ -200 200])
-title('w at 15km')
+caxis([ -5 5])
+title('PT at 15km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -154,9 +150,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop2p);
 colorbar
-%caxis([ -3 3])
-%caxis([ -200 200])
-title('w at 10km')
+caxis([ -5 5])
+title('PT at 10km')
 xlabel('Distance (km)')
 ylabel('time')
 xlim([0 100])
@@ -168,9 +163,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop1p);
 colorbar
-title('w at 5km')
-%caxis([ -3 3])
-%caxis([ -200 200])
+title('PT at 5km')
+caxis([ -5 5])
 xlabel('Distance (km)')
 ylabel('time')
 xlim([0 100])
@@ -183,15 +177,14 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, b_trop0p);
 colorbar
-title('w at 1km')
-%caxis([ -3 3])
-%caxis([ -200 200])
+title('PT at 1km')
+caxis([ -5 5])
 xlabel('Distance (km)')
 ylabel('time')
 xlim([0 100])
 linkaxes(h)
 
-end
+ end
 
 % Difference Hovmoller
 figure(3)
@@ -202,9 +195,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, delta_b3);
 colorbar
-%caxis([ -3 3])
-%caxis([ -200 200])
-title('w at 15km')
+caxis([ -3 3])
+title('PT at 15km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -217,12 +209,11 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, delta_b2);
 colorbar
-%caxis([ -3 3])
-%caxis([ -200 200])
-title('w at 10km')
+caxis([ -3 3])
+title('PT at 10km')
 xlabel('Distance (km)')
 ylabel('Time (s)')
-xlim([0 75])
+xlim([0 100])
 ylim([0 15000])
 
 h(3) = subplot(4,1,3) ;
@@ -232,9 +223,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, delta_b1 );
 colorbar
-title('w at 5km')
-%caxis([ -3 3])
-%caxis([ -200 200])
+title('PT at 5km')
+caxis([ -3 3])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])
@@ -247,9 +237,8 @@ vstep = 0.1;
 v = [-3:vstep:3];
 contourf(xx1 , tt, delta_b0);
 colorbar
-title('w at 1km')
-%caxis([ -3 3])
-%caxis([ -200 200])
+title('PT at 1km')
+caxis([ -3 3])
 xlabel('Distance (km)')
 ylabel('Time (s)')
 xlim([0 100])

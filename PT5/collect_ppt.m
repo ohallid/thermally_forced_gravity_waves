@@ -1,15 +1,15 @@
 function [bb] = collect_ppt()
 
-T       = 1000;  % secs
+T       = 100000;  % secs
 sigma   = 1;    % Scales horizontal variation of F(x). Muliples reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
 
 
 for t = drange(100:100:1000)
-    figure ( 1 )
+    figure ( 10 )
 
     % lid height 40 taken as converged
     h(1)  =  subplot(1,2,1);
-    HL_bar   = 59.999;
+    HL_bar   = 64.993;
     HV_bar   = 30;
     [ ww, bb, fs, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, sigma, t, T, 60*HL_bar );
     % [ ww, bb, fs, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, t, T, 1000 );
@@ -34,14 +34,14 @@ for t = drange(100:100:1000)
     ylabel('z / Ht');
 
     linkaxes(h)
-    xlim([0  10])
+    xlim([0  50])
     ylim([0  HV_bar])
     
     pause
 end
 
 
-figure (2)
+figure (22)
 subplot(2,1,1)
 plot(fs,z);
 x = sprintf('Fourier series of heating function, H=%6.1f*H_t',HL_bar);

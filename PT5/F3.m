@@ -1,6 +1,6 @@
 function[f] = F3(x, x_0, c, t, T, sigma)
 
-root2 = 1.4142;
+root2 = sqrt(2);
 
 % Heavyside function
 H     = 0;
