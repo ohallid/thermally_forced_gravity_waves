@@ -1,0 +1,39 @@
+Notes for Publication;
+
+Title;
+- The Role of Gravity Waves in Conditioning the Remote Troposphere Following Deep Convection
+- The Influence of Thermally Forced Gravity Waves on the Remote Troposphere
+- Tropospheric Response to Convection Forced Gravity Waves.
+
+
+Objectives;
+- How gravity waves comunicate information in the troposphere when radiation into the stratosphere is enabled. 
+- Qualitative changes in the stability of the neighbouring and remote Troposphere due to changes in heating profile.   Specifically, what are the effects of different horizontal length scales and vertical profiles of heating? 
+- Consequences of transient heat source. 
+- In a radiation system, how Coriolis alters the situation. 
+
+Papers to cite;
+- Bretherton and Smolarkiewicz 1988 (gravity waves)
+- Nicholls 1991 (mode 1 and 2)
+- Lane and Reeder 2000 (mode 3)
+- Shutts and Gray 1994 (rotation)
+- Pandya and Alexander 1998 (stratosphere)
+
+
+
+Methodology;
+- Schematic from poster? 
+- Eqn set.
+- Heating function 
+- Vertical Structure of w, b, with description of integrals.
+- Convergence plots ? Fourier spectrum ? 
+
+Results;
+- 1 panel of modal response in w, z plane. 
+- Hovmollers with different \sigma
+- w_max decay for different times? 
+- c_g against \sigma?
+- transient hovmoller
+- CAPE / CIN ?
+
+
