@@ -9,7 +9,7 @@ for t = drange(100:100:1000)
 
     % lid height 40 taken as converged
     h(1)  =  subplot(1,2,1);
-    HL_bar   = 59.999;
+    HL_bar   = 99.999;
     HV_bar   = 30;
     [ ww, bb, fs, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, sigma, t, T, 60*HL_bar );
     % [ ww, bb, fs, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, t, T, 1000 );

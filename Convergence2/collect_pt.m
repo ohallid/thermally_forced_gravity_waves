@@ -1,7 +1,7 @@
 function [bb] = collect_pt()
 
-t       = 500;   % secs
-T       = 10000;  % secs
+t       = 100;   % secs
+T       = 3600;  % secs
 sigma   = 5;     % multiplies reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
 scalar  = 128;
 
@@ -9,11 +9,11 @@ figure ( 1 )
 
 % lid height 1
 h(1)  =  subplot(3,1,1);
-HL_bar   = 79.999;
+HL_bar   = 99.999;
 HV_bar   = 6;
 % [ ww, bb, fs, xx, zz ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, t, T);
-[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar )
-contourf(xx,zz,ww,30);
+[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar );
+contourf(xx,zz,bb,30);
 colorbar
 grid on
 axis equal
@@ -26,8 +26,8 @@ h(2)  =  subplot(3,1,2) ;
 HL_bar   = 3.05;
 HV_bar   = 3;
 % [ww, bb, fs, xx, zz ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, t, T);
-[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar )
-contourf(xx,zz,ww,30);
+[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar );
+contourf(xx,zz,bb,30);
 colorbar
 grid on
 axis equal
@@ -40,8 +40,8 @@ h(3)  =  subplot(3,1,3);
 HL_bar   = 1.050;
 HV_bar   = 1;
 %  [ww, bb, fs, xx, zz ] = series_half_sinusoidp_w_b(HL_bar , HV_bar, t, T);
-[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar )
-contourf(xx,zz,ww,30);
+[ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_bar, sigma, t, T, scalar * HL_bar );
+contourf(xx,zz,bb,30);
 colorbar
 grid on
 axis equal
