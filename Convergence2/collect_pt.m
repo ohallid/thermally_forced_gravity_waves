@@ -1,7 +1,7 @@
 function [bb] = collect_pt()
 
-t       = 100;   % secs
-T       = 3600;  % secs
+t       = 1000;   % secs
+T       = 360000000;  % secs
 sigma   = 5;     % multiplies reference value \sigma_0 i.e. sigma = 3 means sigma = 3 \sigma_0
 scalar  = 128;
 

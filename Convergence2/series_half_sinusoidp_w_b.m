@@ -8,7 +8,7 @@ function [ ww, bb, FS, b, m, xx, zz, z ] = series_half_sinusoidp_w_b(HL_bar, HV_
 Ht_bar  = 1 / HL_bar;    % Ratio, height to top of heating
 dx      = 0.1;          % x-step
 dz      = 0.1;         % z-step
-x       = [0:dx:100 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
+x       = [0:dx:10 ];    % x = 10 equivalent to 10 * \sigma (FWHM, PB F(x) )
 z       = [0:dz:HV_bar ];     % z = 1  equivalent to H_t, H >> H_t is lid position
 x_0     = 0;             % initial position of heating function, middle of box
 s       = 0;             
@@ -29,10 +29,10 @@ for mz = 2: mz_max
     FS = FS + b(mz) * sin ( pi * mz .* z / HL_bar );
 end 
 
-bb  = 10 * bb / 280;     % see b defn from DP paper
-Q   = 0.2;                  % system scaling factor
-ww  = Q * ww;
-bb  = Q * bb;
+% bb  = 10 * bb / 280;     % see b defn from DP paper
+% Q   = 0.000375;                  % system scaling factor
+% ww  = Q * ww;
+% bb  = Q * bb;
  
 
 return 
